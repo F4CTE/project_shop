@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CrudController extends AbstractController
 {
-    #[Route('/crud', name: 'app_crud')]
+    #[Route('/admin/crud', name: 'admin_crud')]
     public function index(): Response
     {
-        return $this->render('crud/index.html.twig', [
+        return $this->render('admin/crud.html.twig', [
             'controller_name' => 'CrudController',
         ]);
     }
