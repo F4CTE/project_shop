@@ -28,17 +28,19 @@ class AppFixtures extends Fixture
         }
 
 
-        for($i = 0; $i < self::NB_PRODUCTS; $i++) {
+        for ($i = 0; $i < self::NB_PRODUCTS; $i++) {
             $post = new Product();
             $post
                 ->setName($faker->realText(35))
                 ->setVisible($faker->boolean(90))
                 ->setDescription($faker->paragraphs(6, true))
-                ->setTaxFreePrice($faker->randomFloat(2, 0, 1000))
+                ->setTaxFreePrice($faker->randomFloat(2, 1, 1000))
                 ->setDiscount($faker->boolean(20))
                 ->setCategory(
                     $this->getReference(
-                        self::CATEGORY_REF_PREFIX . $faker->numberBetween(1, self::NB_CATEGORIES)));
+                        self::CATEGORY_REF_PREFIX . $faker->numberBetween(1, self::NB_CATEGORIES)
+                    )
+                );
             $manager->persist($post);
         }
 
