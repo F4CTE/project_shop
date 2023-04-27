@@ -36,6 +36,7 @@ class AppFixtures extends Fixture
                 ->setDescription($faker->paragraphs(6, true))
                 ->setTaxFreePrice($faker->randomFloat(2, 1, 1000))
                 ->setDiscount($faker->boolean(20))
+                ->setDateCreated($faker->dateTimeBetween('-2 years'))
                 ->setCategory(
                     $this->getReference(
                         self::CATEGORY_REF_PREFIX . $faker->numberBetween(1, self::NB_CATEGORIES)

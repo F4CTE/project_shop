@@ -3,4 +3,23 @@
 {% block title %}Hello IndexController!
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<style type="text/css">
+		.product {
+			width: 20rem;
+		}
+	</style>
+
+	<h1 class='w-100 text-center'>Products</h1>
+	<div class="container-fluid d-flex flex-row flex-wrap gap-3 justify-content-center">
+		{% for product in products %}
+			<div class="card product">
+				<div class="card-body">
+					<h5 class="card-title">{{ product.name }}</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary">{{ product.taxFreePrice * 1.25 }}
+						$</h6>
+					<a class='text-end' href="{{path('app_product',{id: product.id})}}" class="card-link">Card link</a>
+				</div>
+			</div>
+		{% endfor %}
+	{% endblock %}

@@ -12,7 +12,11 @@ class IndexController extends AbstractController
     #[Route('/acceuil', name: 'app_acceuil')]
     public function index(ProductRepository $productRepository): Response
     {
-        $products = $productRepository->findBy(['visible' => true, 'discount' => true]);
+        $products = $productRepository->findHomepageProducts();
+
+        if(count($products) == 0){
+            throw $this->createNotFoundException('Aucun produit trouvé');
+        }
         return $this->render('acceuil/acceuil.html.twig', [
             'products' => $products,
         ]);

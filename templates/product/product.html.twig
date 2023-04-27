@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!
+{% block title %}
+	{{ product.name }}
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>VAT-free price :{{ product.TaxFreePrice }}</p>
+    <p>price with taxes :{{ product.TaxFreePrice * 1.25 }}</p>
+{% endblock %}

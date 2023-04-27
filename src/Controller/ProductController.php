@@ -15,7 +15,7 @@ class ProductController extends AbstractController
         if (!$product->isVisible()) {
             throw $this->createNotFoundException('This product is not available.');
         } else {
-            return $this->render('product/index.html.twig', [
+            return $this->render('product/product.html.twig', [
                 'product' => $product
             ]);
         }
