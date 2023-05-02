@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRUD LISTE PRODUITS
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1>CRUD Produits</h1>
+
+		<div class="mb-5">
+			<a href="{{ path('products_crud_create') }}">Créer un produit</a>
+		</div>
+
+		{% for product in products %}
+			<div class="mb-2">
+				<a href="{{ path('products_crud_edit', { id: product.id }) }}" class="btn btn-sm btn-warning">Éditer</a>
+				<a href="{{ path('products_crud_delete', { id: product.id })}}" class="btn btn-sm btn-danger">Supprimer</a>
+				{{ product.name }}
+				<span class="badge bg-primary">
+					{{ product.taxFreePrice }}
+				</span>
+				{% if product.discount %}
+					<span class="badge bg-success">Promotion</span>
+				{% endif %}
+			</div>
+		{% else %}
+			<p>Aucun produit trouvé</p>
+		{% endfor %}
+	</div>
+
+{% endblock %}

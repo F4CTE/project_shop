@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRUD ÉDITION PRODUIT
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Édition produit</h1>
+
+		<div>
+			<a href="{{ path('products_crud_list') }}">Retour à la liste</a>
+		</div>
+
+		{{ form(form) }}
+		</div>
+	{% endblock %}

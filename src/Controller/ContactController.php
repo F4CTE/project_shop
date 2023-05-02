@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+use App\Contact\ContactNotifier;
 use App\Form\ContactType;
-use ContactNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
