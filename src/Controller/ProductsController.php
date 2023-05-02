@@ -12,7 +12,6 @@ class ProductsController extends AbstractController
     #[Route('/products', name: 'app_products')]
     public function index(ProductRepository $productRepository): Response
     {
-        $faker = \Faker\Factory::create();
         $products = $productRepository->findBy(['visible' => true]);
         return $this->render('products/products.html.twig', [
             'products' => $products,
