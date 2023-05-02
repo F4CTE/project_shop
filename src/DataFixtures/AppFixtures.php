@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
-use App\Entity\ProductCategory;
+use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -19,7 +19,7 @@ class AppFixtures extends Fixture
         $faker = Factory::create();
 
         for ($i = 1; $i <= self::NB_CATEGORIES; $i++) {
-            $category = new ProductCategory();
+            $category = new Category();
             $category
                 ->setName($faker->realText(15))
                 ->setDescription($faker->realTextBetween(200, 500));

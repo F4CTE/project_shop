@@ -28,7 +28,7 @@ class Product
 
     #[ORM\ManyToOne(inversedBy: 'Products')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ProductCategory $category = null;
+    private ?Category $category = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -89,12 +89,12 @@ class Product
         return $this;
     }
 
-    public function getCategory(): ?ProductCategory
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?ProductCategory $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
