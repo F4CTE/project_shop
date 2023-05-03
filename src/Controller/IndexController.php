@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('/acceuil', name: 'app_acceuil')]
+    #[Route('/', name: 'app_acceuil')]
     public function index(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findHomepageProducts();
