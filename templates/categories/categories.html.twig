@@ -4,6 +4,22 @@
 {% endblock %}
 
 {% block body %}
-    
+	<style type="text/css">
+		.category {
+			width: 20rem;
+		}
+	</style>
 
+	<h1 class='w-100 text-center'>Categories</h1>
+	<div class="container-fluid d-flex flex-row flex-wrap gap-3 justify-content-center">
+		{% for category in categories %}
+			<div class="card category">
+				<div class="card-body">
+					<h5 class="card-title">{{ category.name }}</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary">{{ category.description }}</h6>
+					<a class='text-end' href="{{path('app_category',{id: category.id})}}" class="card-link">Card link</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}
