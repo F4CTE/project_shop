@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\Product1Type;
 use App\Repository\ProductRepository;
+use App\Security\Voter\ProductVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +52,9 @@ class ProductCrudMakerController extends AbstractController
     #[Route('/{id}/edit', name: 'app_product_crud_maker_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {
+
+        $this->denyAccessUnlessGranted(ProductVoter::EDIT, $product, 'You cannot edit this product.');
+
         $form = $this->createForm(Product1Type::class, $product);
         $form->handleRequest($request);
 

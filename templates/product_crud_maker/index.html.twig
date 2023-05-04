@@ -15,6 +15,7 @@
                 <th>TaxFreePrice</th>
                 <th>Description</th>
                 <th>DateCreated</th>
+                <th>author</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <td>{{ product.taxFreePrice }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.dateCreated ? product.dateCreated|date('Y-m-d') : '' }}</td>
+                <td>{{ product.user.userIdentifier }}</td>
                 <td>
                     <a href="{{ path('app_product_crud_maker_show', {'id': product.id}) }}">show</a>
                     <a href="{{ path('app_product_crud_maker_edit', {'id': product.id}) }}">edit</a>
