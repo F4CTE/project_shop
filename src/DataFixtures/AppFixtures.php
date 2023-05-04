@@ -17,6 +17,7 @@ class AppFixtures extends Fixture
     public const NB_CATEGORIES = 50;
     public const NB_PRODUCTS = 200;
     public const CATEGORY_REF_PREFIX = 'CATEGORY_';
+    public const USER_REF_PREFIX = 'USER_';
 
     public function __construct(private UserPasswordHasherInterface $passwordHasher)
     {
@@ -25,6 +26,22 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
+
+        for ($i = 0; $i < self::NB_USERS; $i++) {
+            $user = new User();
+            $user
+                ->setEmail($faker->email)
+                ->setPassword($this->passwordHasher->hashPassword(
+                    $user,
+                    'password'
+                ));
+
+                if($i < self::NB_ADMINS) {
+                    $user->setRoles(['ROLE_ADMIN']);
+                }
+                $this->addReference(self::USER_REF_PREFIX . $i, $user);
+            $manager->persist($user);
+        }
 
         for ($i = 1; $i <= self::NB_CATEGORIES; $i++) {
             $category = new Category();
@@ -45,27 +62,17 @@ class AppFixtures extends Fixture
                 ->setTaxFreePrice($faker->randomFloat(2, 1, 1000))
                 ->setDiscount($faker->boolean(20))
                 ->setDateCreated($faker->dateTimeBetween('-2 years'))
+                ->setUser(
+                    $this->getReference(
+                        self::USER_REF_PREFIX . $faker->numberBetween(0, self::NB_USERS -1)
+                    )
+                )
                 ->setCategory(
                     $this->getReference(
                         self::CATEGORY_REF_PREFIX . $faker->numberBetween(1, self::NB_CATEGORIES)
                     )
                 );
             $manager->persist($post);
-        }
-
-        for ($i = 0; $i < self::NB_USERS; $i++) {
-            $user = new User();
-            $user
-                ->setEmail($faker->email)
-                ->setPassword($this->passwordHasher->hashPassword(
-                    $user,
-                    'password'
-                ));
-
-                if($i < self::NB_ADMINS) {
-                    $user->setRoles(['ROLE_ADMIN']);
-                }
-            $manager->persist($user);
         }
 
         $manager->flush();
