@@ -73,6 +73,8 @@ class ProductCrudMakerController extends AbstractController
     #[Route('/{id}', name: 'app_product_crud_maker_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
     {
+        $this->denyAccessUnlessGranted(ProductVoter::DELETE, $product, 'You cannot delete this product.');
+        
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $productRepository->remove($product, true);
         }
