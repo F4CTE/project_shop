@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\ApiToken;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\User;
@@ -70,6 +71,10 @@ class AppFixtures extends Fixture
             $manager->persist($post);
         }
 
+        $token = new ApiToken();
+        $token->setName($faker->word)
+        ->setToken($faker->uuid);
+        $manager->persist($token);
         $manager->flush();
     }
     
